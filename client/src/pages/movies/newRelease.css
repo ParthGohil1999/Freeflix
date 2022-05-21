@@ -1,0 +1,15 @@
+.newReleaseContainer{
+    background-color: var(--main-color);
+    min-height: 100vh;
+    height: 100%;
+    width: 100vw;
+}
+
+.card{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+}
