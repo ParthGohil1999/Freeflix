@@ -17,12 +17,12 @@ const Navbar = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-  axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+  const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
   useEffect(() => {
     const getContent = async () => {
       try {
-        const res = await axios.get("movies/searchedContent", {
+        const res = await axiosInstance.get("movies/searchedContent", {
           headers: {
             token:
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
@@ -34,7 +34,7 @@ const Navbar = () => {
       }
     };
     getContent();
-  }, []);
+  }, [axiosInstance]);
 
   console.log("Content from search", content);
 
@@ -77,7 +77,8 @@ const Navbar = () => {
                     Movies
                   </span>
                 </Link>
-                <Link to="/newRelease" className="link">
+                <Link to="/newRelease"
+                state={{movie : content}} className="link">
                   <span style={{ padding: "10px" }} className="navbarmainLinks">
                     New Release
                   </span>

@@ -6,25 +6,29 @@ import Card from "./Card";
 
 const NewRelease = () => {
   const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+  const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
   useEffect(() => {
     const getContent = async () => {
       try {
-        const res = await axios.get("movies/searchedContent", {
+        const res = await axiosInstance.get("movies/searchedContent", {
           headers: {
             token:
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setContent(res.data);
+        setLoading(false)
       } catch (err) {
         console.log(err);
       }
     };
     getContent();
-  }, []);
+  }, [axiosInstance]);
+
+  
 
   return (
     <div className="newReleaseContainer">
@@ -38,6 +42,7 @@ const NewRelease = () => {
           }}
         />
       </div>
+        {loading ? <button className="refreshButton">Content is loading, please wait. If you do not see anything please refresh the page...</button> : ""}
       <div className="card">
         {content
           .filter((val) => {

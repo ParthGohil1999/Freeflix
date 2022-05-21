@@ -5,6 +5,17 @@
     width: 100vw;
 }
 
+.refreshButton{
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 255, 255, 0.315);
+    color: rgba(0, 255, 255, 0.767);
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .card{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

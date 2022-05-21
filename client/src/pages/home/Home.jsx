@@ -4,18 +4,17 @@ import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Search } from "@material-ui/icons";
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
   useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const res = await axios.get(
+        const res = await axiosInstance.get(
           `lists/homeList${type ? "?type=" + type : ""}${
             genre ? "&genre=" + genre : ""
           }`,
@@ -32,7 +31,7 @@ const Home = ({ type }) => {
       }
     };
     getRandomLists();
-  }, [type, genre]);
+  }, [type, genre, axiosInstance]);
 
   return (
     <div className="home">

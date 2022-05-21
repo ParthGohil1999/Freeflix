@@ -5,12 +5,12 @@ import axios from "axios";
 
 export default function WidgetSm() {
   const [newUsers, setNewUsers] = useState([]);
-  axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+  const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
   useEffect(() => {
     const getNewUsers = async () => {
       try {
-        const res = await axios.get("/users?new=true", {
+        const res = await axiosInstance.get("/users?new=true", {
           headers: {
             token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
@@ -21,7 +21,7 @@ export default function WidgetSm() {
       }
     };
     getNewUsers();
-  }, []);
+  }, [axiosInstance]);
 
   return (
     <div className="widgetSm">

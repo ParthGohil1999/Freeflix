@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
-  axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+  const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("/users/stats", {
+        const res = await axiosInstance.get("/users/stats", {
           headers: {
             token:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzQxN2QwMGIzMzgxN2U5ZjJiMDYxOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MTg0NzUxNywiZXhwIjoxNjUyMjc5NTE3fQ.i8P6vHXqfLUrc422jCgAOBGMZp8Qf3JJ5r8dZSz_5Pc",

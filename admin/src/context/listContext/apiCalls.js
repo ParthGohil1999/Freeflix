@@ -10,12 +10,12 @@ import {
   getListsStart,
   getListsSuccess,
 } from "./ListActions";
-axios = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 export const getLists = async (dispatch) => {
   dispatch(getListsStart());
   try {
-    const res = await axios.get("/lists", {
+    const res = await axiosInstance.get("/lists", {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
@@ -30,7 +30,7 @@ export const getLists = async (dispatch) => {
 export const createList = async (list, dispatch) => {
   dispatch(createListStart());
   try {
-    const res = await axios.post("/lists", list, {
+    const res = await axiosInstance.post("/lists", list, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
@@ -45,7 +45,7 @@ export const createList = async (list, dispatch) => {
 export const deleteList = async (id, dispatch) => {
   dispatch(deleteListStart());
   try {
-    await axios.delete("/lists/" + id, {
+    await axiosInstance.delete("/lists/" + id, {
       headers: {
         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
       },
