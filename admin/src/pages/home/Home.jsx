@@ -51,7 +51,7 @@ export default function Home() {
       }
     };
     getStats();
-  }, [MONTHS]);
+  }, [MONTHS, axiosInstance]);
 
   return (
     <div className="home">
